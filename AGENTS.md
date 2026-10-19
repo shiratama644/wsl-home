@@ -186,21 +186,20 @@ git reset --hard FETCH_HEAD
   | AI 作業環境（サンドボックス内の本リポジトリ clone） | 設定の編集・Git 操作・文書検証 | `zsh` / `shellcheck` / `pre-commit` は無い（2026-10-19 実測） |
   | ユーザー実環境（Windows 11 + WSL Ubuntu、`/home/ubuntu`） | 設定の実適用先 | AI は直接変更できない。適用はユーザーの承認・実行による |
 
-- **検証コマンド**（§3.1 の正本。AI 作業環境で実行できるものだけを commit 前検証とする）:
+- **検証コマンド**（§3.1 の正本）:
 
   ```bash
-  sh -n .agent/hooks/*.sh
-  python3 -m json.tool .agent/settings.json > /dev/null
-  test "$(readlink CLAUDE.md)" = "AGENTS.md" && test "$(readlink .claude)" = ".agent" && cmp -s CLAUDE.md AGENTS.md
-  git diff --cached --check   # stage 後に実行
+  make check   # pre-commit 全フック + Makefile の PROJECT_CHECKS。CI も同じ入口
+  make links   # Markdown の内部リンクだけを見る場合
   ```
 
-  - Markdown の内部リンク: 変更した入口文書（`AGENTS.md` / `.agent/README.md` / rules・skills・hooks の `index.md` / 変更したスキル）は相対リンク先の実在を確認する（専用スクリプトは未導入のため手順として実施し、結果を報告する）。
-  - 新規・変更した `.sh` は代表入力で終了コードも確認する（フックの動作確認例は `.agent/README.md`）。
+  - `make check` には pre-commit が必要（導入は `make setup`）。AI 作業環境では venv 等で用意し、`PRE_COMMIT=<path> make check` の形で実行してよい（2026-10-19 に全フック PASS を実測）。
+  - 変更内容に応じて次も確認する: symlink の解決、新規・変更した `.sh` の代表入力での終了コード（動作確認例は `.agent/README.md`）、stage 後の `git diff --cached --check`。
+  - Bun + TypeScript の検証（型チェック・テスト等）は、ツールの実装時に本節と `Makefile` の `PROJECT_CHECKS` へ記録してから使う。
 - ユーザー実環境側の検証（AI 作業環境では実行不可。結果はユーザーから受けて記録する）:
   - zsh 設定を追加したら `zsh -n <対象>` と新しいタブでの起動確認。
   - 配置ツールは Bun + TypeScript で実装する方針を決定した（2026-10-19。§6.4）。検証方法（dry-run / 一時 HOME での試験 / リンク検査）と実際のコマンド名は、設計文書と実装に合わせて本節へ記録してから使う。記録前に、存在しないコマンドを案内・実行しない。
-- 環境の初期セットアップ: AI 作業環境では依存のインストールは不要（`sh` / `git` / `python3` のみで検証できる）。`Makefile` / pre-commit / CI は未導入（導入する場合は本節を更新してから使う）。
+- 環境の初期セットアップ: `make setup` で pre-commit フックを導入する（初回のみ）。AI 作業環境が再構築された場合は、§4.1.1 の復旧後に pre-commit を用意し直し、`make check` で健全性を確認してから作業を再開する。
 
 ### 6.2 サンドボックス制約（乗り越えず、迂回する）
 
@@ -222,18 +221,20 @@ git reset --hard FETCH_HEAD
 - 設計合意前の禁止事項: ユーザー実環境でのインストール・ファイル移動・上書き・リンク作成を前提に進めない。本リポジトリ内でも、合意前の配置対象ファイルを「確定仕様」として作り込まない。
 - 合意済み: 実体は本リポジトリ側に 1 つ置き、ホームからは一方向のシンボリックリンクを張る（例: `~/.zshrc` → リポジトリ内実体）。相互リンク・常時同期は使わない。詳細・限界・復旧手順は `wsl-dotfiles` スキルを正とする。
 - 合意済み（2026-10-19）: 配置方式は、chezmoi の設計を参考にした自前ツール（Bun + TypeScript で新規実装し、chezmoi 本体との互換は目指さない）。初期範囲は、中核（対応表に基づく symlink 配置・検査・状態表示、既存ファイルがあれば停止、バックアップ付き移行は別操作、一時 HOME での試験）に、テンプレート展開と変更時スクリプトを加えたものとする。レイアウトの大枠はカテゴリ別（`zsh/`・`config/`・`git/`・`etc/`・`scripts/`）とする。テンプレート対象ファイルの扱い（リンクではなく生成になる）・リンク対応表・ツールの配置と名前・状態管理の詳細は、設計文書で確定する。
+- 合意済み（2026-10-19、機能要求の追加）: 別端末への引っ越し（新端末の初期設定の案内）、暗号化保存（age 形式を想定し復号鍵はリポジトリ外に置く。**SSH 秘密鍵は対象外**とし、端末ごとに作り直す）、CLI と TUI の二段構成（中核を共有し、CLI が全機能を持つフォールバック）を要件とする。要求の正本は `docs/arch/product.md`。実装順序は未決定であり、設計文書で確定する。
 - 変えないもの: Starship の現在の見た目 / 既存の mise・uv・Go・Rust・Git・Docker 構成 / システム Python。変更が必要なら理由と影響を提示し、承認を得る。
 - 参照先（UbuntuHome）は構造・操作感の参考であり、無条件コピーの対象ではない（流用しない点の一覧は `wsl-dotfiles` スキル）。コードを転載する場合はライセンス・許可を先に確認する。
 - 未決（本節で決めない。決まったら本節とスキルを更新する）:
-  1. WSL 専用か、将来 Linux / macOS でも使うか
+  1. 対象 OS の範囲（別端末への引っ越しは要件化済み。WSL 以外をいつ対象にするか）
   2. 本リポジトリの公開 / 非公開
   3. `gg` の互換水準（完全互換か、安全性修正を含めて操作感だけ寄せるか）と、自前ツールへの統合方法
   4. ホームとのリンク対応表の詳細と、最初の移行範囲
   5. テンプレート方式・変更時スクリプトの状態管理・ツールの配置と名前（設計文書で確定する）
+  6. 実装順序（中核・テンプレート・引っ越し・暗号化・TUI の段階分け）
 
 ### 6.5 Lint・フォーマット特有ルール
 
-- 自動フォーマッタ・Lint は未導入。導入する場合は §6.1 に記録してから使う。
+- 整形・Lint は Biome（`biome.json`。pre-commit 経由で JSON / JS / TS / CSS が対象）。対象範囲を広げる場合は §6.1 に記録してから使う。
 - フック等の `.sh` は POSIX sh で書く（bash / zsh 依存の文法を使わない。`.agent/hooks/index.md` 参照）。将来の zsh 設定ファイルの書式規則は設計時に決める。
 - Markdown は `.agent/rules/03_doc-style.md` に従う。ただし設定ファイルの名前はツールが定める名前（`.zshrc` 等）が命名規約に優先する。
 
@@ -244,19 +245,11 @@ git reset --hard FETCH_HEAD
 
 ### 6.7 ドキュメント運用
 
-- `docs/` は未導入（2026-10-19 の取り込み範囲外）。現時点の正本の配置は次のとおり。
-
-  | 用途 | 正本 |
-  | :--- | :--- |
-  | 作業規約・プロジェクト固有ルール | `AGENTS.md`（特に §6） |
-  | プロジェクト全体像 | `.agent/skills/project-overview/SKILL.md` |
-  | WSL・dotfiles の前提知識 | `.agent/skills/wsl-dotfiles/SKILL.md` |
-  | トピック別ルール | `.agent/rules/`（入口は `rules/index.md`） |
-  | 実行記録 | `.agent/logs/`（追加のみ） |
-
-- スキル / ルール / フックを追加・変更したら、対応する `index.md` を必ず更新する（§8.6）。
-- `docs/` を導入する場合は TEMPLATE_REPO の構成（`docs/task-list.md` を進捗の正本とする等）に寄せ、本節・`.agent/rules/01_information-hierarchy.md`・`.agent/rules/03_doc-style.md`・`session-start.sh` の前提を一括で整合させる。それまでは、`docs/task-list.md` を前提とする上流の記述を上表の配置に読み替える。
-- `README.md` はプロジェクト概要用（現在は最小限の内容）。
+- 進捗の正本は `docs/task-list.md`（状態定義・証拠のルールは同ファイル冒頭）。文書全体の目次は `docs/README.md`。
+- 仕様は `docs/arch/`、個別の設計判断は `docs/adr/`（1 判断 1 ファイル。過去の ADR は書き換えない）、計画は `docs/planning/`（`_TEMPLATE.md` 形式）、調査は `docs/research/`、監査は `docs/audit/`、運用は `docs/ops/` に置く。
+- 文書を追加・削除・移動したら `docs/README.md` の目次を同じ変更で更新する。スキル / ルール / フックを追加・変更したら、対応する `index.md` を必ず更新する（§8.6）。
+- 実行記録は `.agent/logs/` と `docs/audit/activity.md`（どちらも追加のみ）。
+- プロジェクト全体像は `.agent/skills/project-overview/SKILL.md`、WSL・dotfiles の前提知識は `.agent/skills/wsl-dotfiles/SKILL.md` に置く（仕様の正本は `docs/arch/` であり、スキルは事実・手順）。
 
 ---
 

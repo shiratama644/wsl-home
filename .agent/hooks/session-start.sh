@@ -25,7 +25,7 @@ fi
 
 CONTEXT="[session-start] 作業開始時の状態です。
 - 正本: AGENTS.md（CLAUDE.md はその symlink）。作業前に必ず読むこと。
-- 進捗と経緯: .agent/logs/（docs/task-list.md は未導入。AGENTS.md §6.7 参照）
+- 作業タスクの正本: docs/task-list.md
 - ブランチ: ${BRANCH:-（不明）}
 - 直近のコミット:
 ${LOG:-（なし）}

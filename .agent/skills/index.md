@@ -4,9 +4,8 @@
 > 必要なスキルだけをピンポイントで読み込む（コンテキストの無駄遣いを防ぐ）。
 >
 > ここにあるのは **Agent 自身のスキル** — 「このプロジェクトで何をどうやるとうまくいくか」
-> という実践的なノウハウ・手順・パターン。設計仕様の正本ではない。
-> 本リポジトリ（wsl-home）では `docs/` は未導入のため、現在の正本は `AGENTS.md §6`（規約）と
-> `project-overview` / `wsl-dotfiles` スキル（事実・前提）です（`AGENTS.md §6.7` 参照）。
+> という実践的なノウハウ・手順・パターン。設計仕様の正本ではない。設計の正本は `docs/`、
+> wsl-home の前提知識は `wsl-dotfiles` スキルです。
 > 作業規約は `AGENTS.md` と `.agent/rules/`。
 >
 > 各スキルは `<name>/SKILL.md`（YAML frontmatter に `name` / `description`）。
@@ -62,17 +61,17 @@
 
 > 分野欄が「ソフトウェア」のスキルは、コードを扱う作業でのみ使う。それ以外の分野では読まなくてよい。
 
-## 設計・進捗の正本（wsl-home の現在の配置）
-
-本リポジトリでは `docs/` は未導入です（`AGENTS.md §6.7`）。現在の正本は次のとおりです。
+## 設計・進捗の正本（スキルではなく docs/）
 
 | 文書 | 内容 |
 | :--- | :--- |
+| [docs/README.md](../../docs/README.md) | 全ドキュメントの目次 |
+| [docs/task-list.md](../../docs/task-list.md) | タスク管理の唯一の正本 |
+| [docs/arch/README.md](../../docs/arch/README.md) | 仕様書一覧 |
+| [docs/planning/_TEMPLATE.md](../../docs/planning/_TEMPLATE.md) | 計画書テンプレート |
 | [AGENTS.md](../../AGENTS.md) | 開発規約（汎用節 + §6 プロジェクト固有の正本） |
-| [project-overview](./project-overview/SKILL.md) | プロジェクト全体像（目的・現在地・構成） |
 | [wsl-dotfiles](./wsl-dotfiles/SKILL.md) | WSL 環境・dotfiles 設計の前提知識（合意済み方針・未決事項を含む） |
 | [.agent/rules/](../rules/) | トピック別ルール（入口は [`rules/index.md`](../rules/index.md)） |
-| [.agent/logs/](../logs/) | 実行記録（進捗と経緯。追加のみ） |
 
 ## スキル一覧
 

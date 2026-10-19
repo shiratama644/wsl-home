@@ -60,8 +60,8 @@ git diff --cached --name-only | grep -E "(^|/)\.env($|\.)|id_(ed25519|rsa|ecdsa|
 
 ### (D) ドキュメント整合性
 
-- `docs/` に追加・削除があれば `docs/README.md` の目次が更新されているか（wsl-home では `docs/` 未導入のため現時点は対象外。代わりに、スキル・ルール・フックの変更に対応する `index.md` が更新されているか確認する）
-- 証拠（コミット SHA / 検証結果 / 実測値）が記録されているか（wsl-home では `.agent/logs/` の実行記録に残す）
+- `docs/` に追加・削除があれば `docs/README.md` の目次が更新されているか。スキル・ルール・フックの変更に対応する `index.md` が更新されているか
+- `docs/task-list.md` に証拠（コミット SHA / 検証結果 / 実測値）が記録されているか
 
 ## 5. 報告のテンプレート
 

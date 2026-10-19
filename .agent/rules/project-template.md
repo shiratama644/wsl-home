@@ -52,6 +52,5 @@ paths:
 
 ## 7. ドキュメント運用（§6.7相当）
 
-- `docs/` は未導入です。正本は `AGENTS.md §6` / `project-overview` / `wsl-dotfiles` / `.agent/rules/` / `.agent/logs/` です。
-- スキル・ルール・フックを変更したら対応する `index.md` を更新します。
-- `docs/` を導入するときは、本ルールと `01_information-hierarchy.md` / `03_doc-style.md` の前提を一括で整合させます。
+- 進捗の正本は `docs/task-list.md`、文書の目次は `docs/README.md`、仕様は `docs/arch/`、計画は `docs/planning/` です。
+- 文書を追加・削除・移動したら目次を更新し、スキル・ルール・フックを変更したら対応する `index.md` を更新します。

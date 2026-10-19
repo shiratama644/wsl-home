@@ -72,7 +72,7 @@ sh .agent/hooks/session-start.sh | head -c 200                                  
 
 ## 本リポジトリ（wsl-home）での取り込み記録
 
-本ディレクトリは `shiratama644/TEMPLATE_REPO`（commit `267d9d0`）から 2026-10-19 に取り込みました。取り込み範囲は `.agent/` と `AGENTS.md`（および symlink の `CLAUDE.md` / `.claude`）のみで、`docs/`・`Makefile`・`scripts/`・CI 設定等は含みません。そのため、上流文書にある `make check` / `docs/task-list.md` 前提の記述は、`AGENTS.md §6`（特に §6.1 の検証コマンドと §6.7 の配置）に読み替えてください。プロジェクト固有の調整点は `AGENTS.md §6`、`skills/project-overview/SKILL.md`、`skills/wsl-dotfiles/SKILL.md`、`rules/project-template.md` に集約しています。
+本ディレクトリは `shiratama644/TEMPLATE_REPO`（commit `267d9d0`）から 2026-10-19 に取り込みました。当初は `.agent/` と `AGENTS.md` のみでしたが、同日に `docs/`・`Makefile`・`scripts/`・CI 等の残り一式も取り込み、文書運用は `docs/` 前提に統一しています（進捗の正本は `docs/task-list.md`）。プロジェクト固有の調整点は `AGENTS.md §6`、`skills/project-overview/SKILL.md`、`skills/wsl-dotfiles/SKILL.md`、`rules/project-template.md` に集約しています。
 
 ## 新規プロジェクトへの適用手順（上流の汎用手順）
 
