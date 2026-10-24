@@ -26,7 +26,6 @@
 
 | ID | 状態 | 残作業 |
 |---|---|---|
-| BASE-2 | ローカル検証済み | Dependency graph の有効化（ユーザー操作）と Dependency Review の再実行 |
 | DESIGN-2 | 未着手 | 自前ツールの設計文書の作成と承認 |
 | SPIKE-1 | 未着手 | AI 作業環境で Bun を実行できることの実証 |
 
@@ -42,7 +41,7 @@
 | ID | タスク | 状態 | 進捗 | 依存 | 完了条件 | 証拠 |
 |---|---|---|---:|---|---|---|
 | BASE-1 | TEMPLATE_REPO の Agent 設定（AGENTS.md / .agent）を取り込み wsl-home 用に最適化する | 完了 | 100% | — | symlink 構成が再現され、AGENTS.md §6 と project-overview / wsl-dotfiles スキルが記入され、§6.1 の検証が PASS する | `c0ee132`、`e38a2d8`。PR #1 |
-| BASE-2 | TEMPLATE_REPO 残り一式（docs / Makefile / scripts / CI 等）を取り込み docs 運用へ移行する | ローカル検証済み | — | BASE-1 | docs 運用（本ファイルが進捗正本）へ規約類が整合し、`make links` が PASS し、CI の初回結果を確認済みである | `a9c0f85`。ローカル `make check` 全フック PASS、PR 向け CI 成功（make check・gitleaks）。Dependency Review は Dependency graph 未有効のため失敗（有効化後に再実行して完了とする） |
+| BASE-2 | TEMPLATE_REPO 残り一式（docs / Makefile / scripts / CI 等）を取り込み docs 運用へ移行する | 完了 | 100% | BASE-1 | docs 運用（本ファイルが進捗正本）へ規約類が整合し、`make links` が PASS し、CI の初回結果を確認済みである | `a9c0f85`、`8601b5e`。ローカル `make check` 全フック PASS、PR 向け CI 成功（make check・gitleaks、run 39281743343）。Dependency graph は 2026-10-25 に有効化済み（Dependency Review の再実行結果は実行ログに記録） |
 | DESIGN-1 | dotfiles の配置方式を決定する | 完了 | 100% | BASE-1 | 配置方式と初期範囲が AGENTS.md §6.4 と wsl-dotfiles スキルに記録されている | `c8d04fc`、`69b8455` |
 
 ### 自前ツール設計 (2026-10-19 登録)
