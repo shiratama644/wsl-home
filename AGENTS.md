@@ -195,7 +195,7 @@ git reset --hard FETCH_HEAD
 
   - `make check` には pre-commit が必要（導入は `make setup`）。AI 作業環境では venv 等で用意し、`PRE_COMMIT=<path> make check` の形で実行してよい（2026-10-19 に全フック PASS を実測）。
   - 変更内容に応じて次も確認する: symlink の解決、新規・変更した `.sh` の代表入力での終了コード（動作確認例は `.agent/README.md`）、stage 後の `git diff --cached --check`。
-  - Bun + TypeScript の検証（型チェック・テスト等）は、ツールの実装時に本節と `Makefile` の `PROJECT_CHECKS` へ記録してから使う。
+  - Bun + TypeScript の検証（型チェック・テスト等）は、ツールの実装時に本節と `Makefile` の `PROJECT_CHECKS` へ記録してから使う。なお AI 作業環境では、npm パッケージ `bun` で Bun 1.4.4 と `bun test` が動作することを 2026-10-25 に実測した（SPIKE-1）。サンドボックス再構築時は再インストールが必要である。
 - ユーザー実環境側の検証（AI 作業環境では実行不可。結果はユーザーから受けて記録する）:
   - zsh 設定を追加したら `zsh -n <対象>` と新しいタブでの起動確認。
   - 配置ツールは Bun + TypeScript で実装する方針を決定した（2026-10-19。§6.4）。検証方法（dry-run / 一時 HOME での試験 / リンク検査）と実際のコマンド名は、設計文書と実装に合わせて本節へ記録してから使う。記録前に、存在しないコマンドを案内・実行しない。
