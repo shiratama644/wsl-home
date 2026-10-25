@@ -1,0 +1,50 @@
+# wsl-home の .gitignore
+# 本リポジトリは公開のため、秘密情報・履歴・個人設定は「置かない」ことを原則とし、
+# 本ファイルは事故防止の補助とする。最終確認は commit 前の git diff で行う（AGENTS.md §6.3）。
+
+# --- Secrets（絶対にコミットしない） ---------------------------------------
+.env
+.env.*
+!.env.example
+!.env.template
+# SSH 等の秘密鍵（公開鍵 *.pub は対象外だが、追加時は内容を必ず目視確認する）
+**/id_ed25519
+**/id_rsa
+**/id_ecdsa
+**/id_dsa
+*.pem
+*.key
+
+# --- シェル・ツールの履歴（dotfiles でも管理しない） --------------------------
+.zsh_history
+.bash_history
+.python_history
+.lesshst
+*.log
+
+# --- 一時ファイル・参照用クローン -------------------------------------------
+/tmp/
+/temp/
+/logs/
+/reference-*/
+
+# --- Bun / TypeScript（自前ツールの実装時） ----------------------------------
+node_modules/
+
+# --- OS / エディタ -----------------------------------------------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- Agent 個人設定（TEMPLATE_REPO 由来。チーム共有は settings.json） ---------
+.agent/settings.local.json
+.claude/settings.local.json
+.agent/agent-memory/
+.claude/projects/
+
+# ローカル専用ファイル（Git の名前/メール等）の置き場所は dotfiles 設計で確定したら、
+# ここに具体的なパスを明示して追加する（推測の広いパターンは置かない）。
