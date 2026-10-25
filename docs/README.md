@@ -11,7 +11,7 @@ docs/
 ├── arch/              仕様（どう作るか・どういう構成か）
 │   ├── README.md      仕様書の一覧と読み方
 │   ├── product.md     目的・対象・用語
-│   ├── tool.md        自前ツール dotctl の設計（案）
+│   ├── tool.md        自前ツール dotctl の設計（仕様の正本）
 │   ├── architecture.md ディレクトリ構成・読み込みの流れ
 │   └── milestones.md  段階と完了条件
 ├── adr/               個別の ADR（1 判断 1 ファイル。今後の新規判断はここに書く）
@@ -19,7 +19,7 @@ docs/
 ├── planning/          計画書（タスクごとの範囲と完了条件）
 │   ├── README.md      計画書の一覧と作り方
 │   ├── _TEMPLATE.md   計画書の書式
-│   └── TOOL_PLAN.md   dotctl の実装計画（案）
+│   └── TOOL_PLAN.md   dotctl の実装計画
 ├── research/          調査結果
 │   └── README.md      調査の一覧と書き方
 ├── audit/             差分・問題の監査

@@ -1,6 +1,6 @@
 # dotctl 設計（自前ツール）
 
-> **状態: 案（DESIGN-2、承認待ち）**。承認されたら本ファイルを dotctl 仕様の正本とする。
+> 状態: 承認済み（2026-10-25、DESIGN-2）。本ファイルを **dotctl 仕様の正本**とする。変更する場合は本ファイルを更新し、大きな判断の変更は ADR を追加してから行う。
 > 機能要求は [product.md](./product.md)、実装の段階計画は [`../planning/TOOL_PLAN.md`](../planning/TOOL_PLAN.md)、進捗は [`../task-list.md`](../task-list.md) を参照する。
 
 2026-10-25 の設計質問で確定した事項:

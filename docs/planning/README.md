@@ -22,8 +22,8 @@
 | 文書 | 対応 ID | 状態 | 役割 |
 |---|---|---|---|
 | [`_TEMPLATE.md`](./_TEMPLATE.md) | — | 現用 | 製品実装など個別タスクの必須形式 |
-| [`TOOL_PLAN.md`](./TOOL_PLAN.md) | TOOL-1〜TOOL-5, MIG-1 | 案（承認待ち） | dotctl の段階型実装計画 |
+| [`TOOL_PLAN.md`](./TOOL_PLAN.md) | TOOL-1〜TOOL-5, MIG-1 | 現用（2026-10-25 承認済み） | dotctl の段階型実装計画 |
 | `INIT_STATE.md` | — | 実行時に作成 | 初期設定の作業記憶（スロット状態・予算）。承認前に書いてよい唯一のファイル |
 | `INIT_PLAN.md` | — | 実行時に作成 | 承認済みの初期設定計画。書式は [`project-init`](../../.agent/skills/project-init/SKILL.md)。テンプレート本体には置かない |
 
-dotctl の実装計画（`TOOL_PLAN.md`）を作成しました（案、承認待ち。`docs/task-list.md` の DESIGN-2 参照）。仕様の正本は [`../arch/tool.md`](../arch/tool.md) です。
+dotctl の実装計画（`TOOL_PLAN.md`）は 2026-10-25 に承認されました。仕様の正本は [`../arch/tool.md`](../arch/tool.md)、進捗は [`../task-list.md`](../task-list.md) です。
