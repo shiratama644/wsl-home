@@ -11,13 +11,15 @@ docs/
 ├── arch/              仕様（どう作るか・どういう構成か）
 │   ├── README.md      仕様書の一覧と読み方
 │   ├── product.md     目的・対象・用語
+│   ├── tool.md        自前ツール dotctl の設計（案）
 │   ├── architecture.md ディレクトリ構成・読み込みの流れ
 │   └── milestones.md  段階と完了条件
 ├── adr/               個別の ADR（1 判断 1 ファイル。今後の新規判断はここに書く）
 │   └── README.md      書き方と番号規則
 ├── planning/          計画書（タスクごとの範囲と完了条件）
 │   ├── README.md      計画書の一覧と作り方
-│   └── _TEMPLATE.md   計画書の書式
+│   ├── _TEMPLATE.md   計画書の書式
+│   └── TOOL_PLAN.md   dotctl の実装計画（案）
 ├── research/          調査結果
 │   └── README.md      調査の一覧と書き方
 ├── audit/             差分・問題の監査
@@ -33,6 +35,7 @@ docs/
 |---|---|
 | 今どの作業が進んでいるか | [`task-list.md`](./task-list.md) |
 | プロジェクトの目的と機能要求 | [`arch/product.md`](./arch/product.md)、[`../README.md`](../README.md) |
+| 自前ツール（dotctl）の設計 | [`arch/tool.md`](./arch/tool.md)、実装計画は [`planning/TOOL_PLAN.md`](./planning/TOOL_PLAN.md) |
 | 構成と Agent の読み込みの流れ | [`arch/architecture.md`](./arch/architecture.md) |
 | なぜこの構成なのか | [`adr/`](./adr/README.md)（個別 ADR） |
 | 次に何をするか・段階の状況 | [`arch/milestones.md`](./arch/milestones.md) |

@@ -16,6 +16,7 @@ wsl-home は、WSL Ubuntu 向け dotfiles と、その配置・検査を行う�
 | 状況 | 最初に読むもの |
 |---|---|
 | プロジェクトの目的を知りたい | [product.md](./product.md) |
+| 自前ツール（dotctl）の設計を知りたい | [tool.md](./tool.md)（案、承認待ち） |
 | 構成と読み込みの流れを知りたい | [architecture.md](./architecture.md) |
 | WSL・dotfiles の前提知識が要る | [`../../.agent/skills/wsl-dotfiles/SKILL.md`](../../.agent/skills/wsl-dotfiles/SKILL.md) |
 | なぜそうなっているか知りたい | [`../adr/`](../adr/README.md) |
@@ -26,5 +27,6 @@ wsl-home は、WSL Ubuntu 向け dotfiles と、その配置・検査を行う�
 | ファイル | 内容 |
 |---|---|
 | [product.md](./product.md) | プロジェクトの目的・対象・機能要求・用語 |
+| [tool.md](./tool.md) | 自前ツール dotctl の設計（案、承認待ち） |
 | [architecture.md](./architecture.md) | ディレクトリ構成・Agent の読み込みの流れ・責務の分担 |
 | [milestones.md](./milestones.md) | 段階ごとの完了条件 |
